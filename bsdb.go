@@ -11,8 +11,8 @@ import (
 
 // container for sql rows (*sql.Row)  and sql colum types (*sql.ColumnType)
 type Output struct {
-	rows  *sql.Rows
-	types []*sql.ColumnType
+	Rows  *sql.Rows
+	Types []*sql.ColumnType
 }
 
 //container for each element comming from database
@@ -37,7 +37,7 @@ func NewWriter() *Writer {
 }
 
 // method to add or change a query to the QueryStuff structure
-func (q *QueryStuff) setQueryText(queryText string) {
+func (q *QueryStuff) SetQueryText(queryText string) {
 	q.QueryText = queryText
 }
 
@@ -69,7 +69,7 @@ func (q *QueryStuff) QueryRow() (Output, error) {
 
 // converts numaric to alpha for excel cell location...
 //if you have over column z let me know and ill make this less stupid
-func toCharStrConst(i int) string {
+func ToCharStrConst(i int) string {
 	asciiRune := rune(i + 65)
 	asciiChar := fmt.Sprintf("%c", asciiRune)
 	return asciiChar
@@ -94,7 +94,7 @@ func (w *Writer) WriteRow(rows []Row, fileName string) {
 
 //method for Output to package rows for excelize package and use in Writer.WriteRrow
 //returns slice of Row
-func (o *Output) prepareRows() []Row {
+func (o *Output) PrepareRows() []Row {
 	rows := o.rows
 	types := o.types
 	allRows := make([]Row, 0)
