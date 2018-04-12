@@ -60,16 +60,16 @@ func (q *QueryStuff) QueryRow() (Output, error) {
 		fmt.Println("row 55")
 		log.Fatal(err)
 	}
-	types, err := rows.ColumnTypes()
+	types, err := Rows.ColumnTypes()
 	var output Output
-	output.rows = rows
-	output.types = types
+	output.Rows = Rows
+	output.Types = types
 	return output, nil
 }
 
 // converts numaric to alpha for excel cell location...
 //if you have over column z let me know and ill make this less stupid
-func ToCharStrConst(i int) string {
+func toCharStrConst(i int) string {
 	asciiRune := rune(i + 65)
 	asciiChar := fmt.Sprintf("%c", asciiRune)
 	return asciiChar
@@ -95,8 +95,8 @@ func (w *Writer) WriteRow(rows []Row, fileName string) {
 //method for Output to package rows for excelize package and use in Writer.WriteRrow
 //returns slice of Row
 func (o *Output) PrepareRows() []Row {
-	rows := o.rows
-	types := o.types
+	rows := o.Rows
+	types := o.Types
 	allRows := make([]Row, 0)
 	for rows.Next() {
 		items := make(Row, len(types))
