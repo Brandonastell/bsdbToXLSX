@@ -62,7 +62,7 @@ func (q *QueryStuff) QueryRow() (Output, error) {
 	}
 	types, err := Rows.ColumnTypes()
 	var output Output
-	output.Rows = Rows
+	output.Rows = rows
 	output.Types = types
 	return output, nil
 }
