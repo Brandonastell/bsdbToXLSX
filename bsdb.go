@@ -60,7 +60,7 @@ func (q *QueryStuff) QueryRow() (Output, error) {
 		fmt.Println("row 55")
 		log.Fatal(err)
 	}
-	types, err := Rows.ColumnTypes()
+	types, err := rows.ColumnTypes()
 	var output Output
 	output.Rows = rows
 	output.Types = types
@@ -82,9 +82,9 @@ func (w *Writer) WriteRow(rows []Row, fileName string) {
 			fmt.Printf("row = %+v\n", item.Value)
 			switch item.Type {
 			case "DATETIME", "DATE":
-				w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(i), j+1), item.Value)
+				w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(j), i+1), item.Value)
 			default:
-				w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(i), j+1), item.Value)
+				w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(j), i+1), item.Value)
 			}
 		}
 
