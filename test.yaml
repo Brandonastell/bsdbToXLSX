@@ -1,0 +1,6 @@
+databaseType : sqlserver
+host : db.place.com
+user : brandon
+pass : mypassword
+port     : default
+database : blahblah

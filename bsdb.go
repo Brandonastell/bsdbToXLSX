@@ -21,6 +21,7 @@ type Output struct {
 //container for each element comming from database
 type Item struct {
 	Type  string
+	Name  string
 	Value interface{}
 }
 
@@ -80,14 +81,18 @@ func toCharStrConst(i int) string {
 
 //method for Writer object, returns slice of Row (each row)
 func (w *Writer) WriteRow(rows []Row, fileName string) {
+	for i, item := range rows[0] {
+		w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(j), 1), item.Name)
+		fmt.Printf("%+v\n", item.Name)
+	}
 	for i, row := range rows {
 		for j, item := range row {
 			fmt.Printf("row = %+v\n", item.Value)
 			switch item.Type {
 			case "DATETIME", "DATE":
-				w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(j), i+1), item.Value)
+				w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(j), i+2), item.Value)
 			default:
-				w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(j), i+1), item.Value)
+				w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(j), i+2), item.Value)
 			}
 		}
 
@@ -112,6 +117,7 @@ func (o *Output) PrepareRows() []Row {
 		for i, type_ := range types {
 			items[i] = &Item{
 				Type:  type_.DatabaseTypeName(),
+				Name:  type_.Name(),
 				Value: thisRow[i],
 			}
 		}
