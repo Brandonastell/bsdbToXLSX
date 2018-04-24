@@ -48,7 +48,7 @@ func (q *QueryStuff) SetQueryText(queryText string) {
 //method on QueryStuff struct
 //method returns Output object
 func (q *QueryStuff) QueryRow() (Output, error) {
-	db, err := sql.Open(q.DatabaseType, q.Loc)
+	db, err := sql.Open(q.DatabaseType, q.Host)
 	if err != nil {
 		fmt.Println("row 45")
 		log.Fatal(err)
@@ -82,7 +82,7 @@ func toCharStrConst(i int) string {
 //method for Writer object, returns slice of Row (each row)
 func (w *Writer) WriteRow(rows []Row, fileName string) {
 	for i, item := range rows[0] {
-		w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(j), 1), item.Name)
+		w.SetCellValue("sheet1", fmt.Sprintf("%s%d", toCharStrConst(i), 1), item.Name)
 		fmt.Printf("%+v\n", item.Name)
 	}
 	for i, row := range rows {
