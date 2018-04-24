@@ -1,5 +1,4 @@
-//package bsdbToXLSX
-package main
+package bsdbToXLSX
 
 import (
 	"errors"
@@ -75,10 +74,4 @@ func QueryConfig(fileName string) *QueryStuff {
 	queryObj := unMarshal(in)
 	queryObj.buildConnString()
 	return queryObj
-}
-
-func main() {
-	result := QueryConfig("./test.yaml")
-	fmt.Println(result.ConnStr)
-
 }
