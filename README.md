@@ -10,7 +10,7 @@ includes drivers for postgres, snowflake, ms sql and sqlite
 
 
 # bsdbToXLSX
-`import "../../../bsdbToXLSX/"`
+`import "github.com/someasshole/bsdbToXLSX/"`
 
 * [Overview](#pkg-overview)
 * [Index](#pkg-index)
